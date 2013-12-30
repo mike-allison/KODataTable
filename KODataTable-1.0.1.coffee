@@ -1,5 +1,5 @@
 ### 
- * Mike Allison Tools - KODataTable v.1
+ * Mike Allison Tools - KODataTable v.1.0.1
  * http://mikeallisononline.com/
  *
  * Dependent on Knockout and jQuery
@@ -25,7 +25,7 @@ class window.KODataTable
         @tableWidth = @options?.tableWidth ? 0
         @sortDir = @options?.sortDir ? []
         @autoSearch = @options?.autoSearch ? true   
-        @selectedRow = ko.observable @options?.selectedRow?
+        @selectedRow = ko.observable @options?.selectedRow?        
         @filter = ko.observable @searchText() 
         @throttleSearch = ko.computed( =>            
             @searchText
@@ -50,7 +50,8 @@ class window.KODataTable
             else
                 @filteredRows()[(@currentPage() * @pageSize())..((@currentPage() + 1 * @pageSize()) - 1)]
         
-        
+        @pageCount = ko.computed =>
+            Math.ceil(@filteredRows().length / @pageSize())
         
         @nextFn = @options?.nextFn?
         @prevFn = @options?.prevFn?        
