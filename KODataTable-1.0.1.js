@@ -1,5 +1,5 @@
 /* 
- * Mike Allison Tools - KODataTable v.1
+ * Mike Allison Tools - KODataTable v.1.0.1
  * http://mikeallisononline.com/
  *
  * Dependent on Knockout and jQuery
@@ -61,6 +61,9 @@
         } else {
           return _this.filteredRows().slice(_this.currentPage() * _this.pageSize(), +((_this.currentPage() + 1 * _this.pageSize()) - 1) + 1 || 9e9);
         }
+      });
+      this.pageCount = ko.computed(function() {
+        return Math.ceil(_this.filteredRows().length / _this.pageSize());
       });
       this.nextFn = ((_ref21 = this.options) != null ? _ref21.nextFn : void 0) != null;
       this.prevFn = ((_ref22 = this.options) != null ? _ref22.prevFn : void 0) != null;
@@ -129,9 +132,6 @@
         if (!this.sortDir[index]) {
           this.sortDir[index] = "A";
         }
-        /*prevSelectedRow = @rows()[@selectedRow()] if (@selectedRow() > -1)
-        */
-
         this.rows.sort(function(left, right) {
           if (_this.sortDir[index] === "A") {
             if (left[_this.columns()[index]] === right[_this.columns()[index]]) {
@@ -154,9 +154,6 @@
         return this.sortDir[index] = (_ref = this.sortDir[index] === "A") != null ? _ref : {
           "D": "A"
         };
-        /*@selectedRow(@rows().indexOf(prevSelectedRow)) if prevSelectedRow?
-        */
-
       }
     };
 
