@@ -1,5 +1,5 @@
 /* 
- * Mike Allison Tools - KODataTable v.1.0.1
+ * Mike Allison Tools - KODataTable v.1.0.2
  * http://mikeallisononline.com/
  *
  * Dependent on Knockout and jQuery
@@ -34,19 +34,18 @@
       this.autoSearch = (_ref18 = (_ref19 = this.options) != null ? _ref19.autoSearch : void 0) != null ? _ref18 : true;
       this.selectedRow = ko.observable(((_ref20 = this.options) != null ? _ref20.selectedRow : void 0) != null);
       this.filter = ko.observable(this.searchText());
-      this.throttleSearch = ko.computed(function() {
-        return _this.searchText;
-      }).extend({
-        throttle: 500
-      });
+      if (this.autoSearch) {
+        this.throttleSearch = ko.computed(function() {
+          return _this.filter(_this.searchText());
+        });
+        this.throttleSearch.extend({
+          throttle: 300
+        });
+      }
       this.filteredRows = ko.computed(function() {
         var filter;
 
-        if (_this.autoSearch) {
-          filter = _this.throttleSearch()().toLowerCase();
-        } else {
-          filter = _this.filter().toLowerCase();
-        }
+        filter = _this.filter().toLowerCase();
         if (!filter) {
           return _this.rows();
         } else {
