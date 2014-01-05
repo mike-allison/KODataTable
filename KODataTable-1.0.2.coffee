@@ -1,5 +1,5 @@
 ### 
- * Mike Allison Tools - KODataTable v.1.0.1
+ * Mike Allison Tools - KODataTable v.1.0.2
  * http://mikeallisononline.com/
  *
  * Dependent on Knockout and jQuery
@@ -26,17 +26,14 @@ class window.KODataTable
         @sortDir = @options?.sortDir ? []
         @autoSearch = @options?.autoSearch ? true   
         @selectedRow = ko.observable @options?.selectedRow?        
-        @filter = ko.observable @searchText() 
-        @throttleSearch = ko.computed( =>            
-            @searchText
-        ).extend throttle : 500
+        @filter = ko.observable @searchText()
+        if @autoSearch 
+            @throttleSearch = ko.computed =>            
+                @filter @searchText()
+            @throttleSearch.extend throttle : 300                    
             
-        @filteredRows = ko.computed =>
-            
-            if @autoSearch
-                filter = @throttleSearch()().toLowerCase()
-            else
-                filter = @filter().toLowerCase()                
+        @filteredRows = ko.computed =>            
+            filter = @filter().toLowerCase()                
                 
             if not filter 
                 @rows()
