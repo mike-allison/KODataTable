@@ -1,5 +1,5 @@
 ### 
- * Mike Allison Tools - KODataTable v.1.0.2
+ * KODataTable
  * http://mikeallisononline.com/
  *
  * Dependent on Knockout and jQuery

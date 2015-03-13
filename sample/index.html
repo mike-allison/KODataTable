@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <title>KODataTable-sample</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <p class="lead">Example</p>
+    <div class="panel panel-default" id="kodt">
+        <div class="panel-heading form-group form-inline">
+            <input type="text" class="form-control" data-bind="value: searchText, valueUpdate: 'afterkeydown'" placeholder="Search" />
+            <select class="form-control" data-bind="value: selectedColumn, options: columns" aria-label="Search column"></select>
+            <button class="btn btn-default" data-bind="click: search">Search</button>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover jTableScroll">
+                <thead>
+                <tr data-bind="foreach: columns">
+                    <th data-bind="text: $data, click: function() { $parent.sort($index()) }" style="cursor: pointer"></th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: currentRows">
+                <tr data-bind="foreach: $parent.columns, click: function () { $root.selectRow($data); },  css: { 'success': $root.selectedRow() == $data }">
+                    <td data-bind="text: $parent[$data]" style="cursor: pointer"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer text-center">
+            <button class="btn btn-default" data-bind="click: firstPage">First</button>
+            <button class="btn btn-default" data-bind="click: prevPage">Prev</button>
+            Page <span data-bind="text: currentPage() + 1"></span> of <span data-bind="text: pageCount"></span>
+            <button class="btn btn-default" data-bind="click: nextPage">Next</button>
+            <button class="btn btn-default" data-bind="click: lastPage">Last</button>
+        </div>
+    </div>
+    <script src="bower_components/knockout/dist/knockout.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jtablescroll/jquery.jTableScroll.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../KODataTable.js"></script>
+    <script>
+        var FirstNames = ["John", "Jane", "Richard", "Trista", "Mike"];
+        var LastNames = ["Doe", "Allison", "Wright", "Jones", "Smith"];
+
+        function FillTable() {
+            var rowData = [];
+            for (var i = 0; i < FirstNames.length; i++) {
+                for (var j = 0; j < LastNames.length; j++) {
+                    var iCount = (i * FirstNames.length) + j;
+                    rowData[iCount] =
+                    {
+                        Id: iCount + 1,
+                        Name: FirstNames[i] + " " + LastNames[j],
+                        Description: "Description " + (iCount + 1)
+                    };
+                }
+            }
+            TableDataVM.selectedRow(-1);
+            TableDataVM.rows(rowData);
+
+        }
+
+
+        var TableDataVM = new KODataTable(
+                {
+                    columns: ["Id", "Name", "Description"],
+                    tableHeight: 500
+                });
+        FillTable();
+        ko.applyBindings(TableDataVM, document.getElementById("kodt"));
+    </script>
+</body>
+</html>

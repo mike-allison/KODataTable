@@ -1,0 +1,11 @@
+{
+    "name": "KODataTable-sample",
+    "version": "1.0.3",
+    "main": "index.html",
+    "dependencies": {
+        "jquery": "~2.1.0",
+        "knockout": ">=3.0.0",
+        "jtablescroll": "~1.6.0",
+        "bootstrap": ">3.0.0"
+    }
+}
