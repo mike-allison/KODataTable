@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>KODataTable</id>
+        <version>1.0.3</version>
+        <authors>Mike Allison</authors>
+        <owners>mikeallison</owners>
+        <projectUrl>http://mikeallisononline.com</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A screaming fast, reactive dynamic datatable viewmodel/template for Knockout with search, header sorting and item selection.</description>
+        <summary>A screaming fast, reactive dynamic datatable viewmodel/template for Knockout with search, header sorting and item selection.</summary>
+        <copyright>Mike Allison 2013</copyright>
+        <tags>knockout datatable grid search pager scrolling</tags>
+        <dependencies>
+            <dependency id="knockoutjs" version="3.0.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="dist/KODataTable.js" target="Content\Scripts" />
+    </files>
+
+</package>
