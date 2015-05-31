@@ -45,7 +45,7 @@ class window.KODataTable
             if (@currentPage() + 1) * @pageSize() > @filteredRows().length
                 @filteredRows()[(@currentPage() * @pageSize())..]
             else
-                @filteredRows()[(@currentPage() * @pageSize())..((@currentPage() + 1 * @pageSize()) - 1)]
+                @filteredRows()[(@currentPage() * @pageSize())..(((@currentPage() + 1) * @pageSize()) - 1)]
         
         @pageCount = ko.computed =>
             Math.ceil(@filteredRows().length / @pageSize())
